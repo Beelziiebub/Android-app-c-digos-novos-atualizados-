@@ -78,6 +78,76 @@ public class Compra_venda_aluga extends AppCompatActivity implements View.OnClic
             }
         }
     }
+
+    private boolean VerificaDados() {
+        // Verificando se a descrição do produto foi preenchida
+        if (edtDescricaoProduto.getText().toString().isEmpty()) {
+            edtDescricaoProduto.setError("Descrição do produto é obrigatória!");
+            edtDescricaoProduto.requestFocus();
+            return false;
+        }
+
+        // Verificando se o preço do produto é válido
+        String preco = edtPrecoProduto.getText().toString();
+        if (preco.isEmpty()) {
+            edtPrecoProduto.setError("Preço do produto é obrigatório!");
+            edtPrecoProduto.requestFocus();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(preco); // Verificando se o preço é um número válido
+        } catch (NumberFormatException e) {
+            edtPrecoProduto.setError("Preço inválido!");
+            edtPrecoProduto.requestFocus();
+            return false;
+        }
+
+        // Verificando se o pagamento foi selecionado
+        int selectedPaymentId = radioGroupPagamento.getCheckedRadioButtonId();
+        if (selectedPaymentId == -1) {
+            Toast.makeText(this, "Selecione um método de pagamento", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Se o pagamento for via Cartão
+        if (selectedPaymentId == R.id.rbCartao) {
+            // Verificando se o número do cartão foi preenchido corretamente
+            if (edtNumeroCartao.getText().toString().isEmpty()) {
+                edtNumeroCartao.setError("Número do cartão é obrigatório!");
+                edtNumeroCartao.requestFocus();
+                return false;
+            }
+
+            // Verificando validade e CVV do cartão
+            if (edtValidadeCartao.getText().toString().isEmpty()) {
+                edtValidadeCartao.setError("Validade do cartão é obrigatória!");
+                edtValidadeCartao.requestFocus();
+                return false;
+            }
+
+            if (edtCvvCartao.getText().toString().isEmpty()) {
+                edtCvvCartao.setError("CVV do cartão é obrigatório!");
+                edtCvvCartao.requestFocus();
+                return false;
+            }
+        }
+
+        // Se o pagamento for via Pix
+        if (selectedPaymentId == R.id.rbPix) {
+            // Verificando se a chave PIX foi inserida
+            if (edtChavePix.getText().toString().isEmpty()) {
+                edtChavePix.setError("Chave PIX é obrigatória!");
+                edtChavePix.requestFocus();
+                return false;
+            }
+        }
+
+        return true; // Dados estão válidos
+    }
+}
+
+
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
