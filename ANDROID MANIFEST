@@ -10,20 +10,31 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Q"
         tools:targetApi="31">
         <activity
-            android:name=".confirmacao"
+            android:name=".Configuracoes"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarContato"
             android:exported="false" />
         <activity
             android:name=".Compra_venda_aluga"
+            android:exported="false" />
+        <activity
+            android:name=".confirmacao"
             android:exported="false" />
         <activity
             android:name=".AgendamentoAtendimento"
             android:exported="false" />
         <activity
             android:name=".Menu"
-            android:exported="false" /> <!-- Activity de Login com intent filter -->
+            android:exported="false" />
+        <activity
+            android:name=".Configuracoes"
+            android:exported="false" />
+        <activity
+            android:name=".ConsultarContato"
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true">
