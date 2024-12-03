@@ -65,13 +65,35 @@ public class BancoController extends SQLiteOpenHelper {
         return id; // Retorna o id do usuário inserido ou -1 se houver erro
     }
 
+    // Função para inserir uma transação no banco de dados
+    public long inserirTransacao(String descricao, String preco, String tipoTransacao, String metodoPagamento, String email) {
+        // Obtendo uma instância do banco de dados
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Criando um objeto ContentValues para inserir os dados
+        ContentValues values = new ContentValues();
+        values.put("descricao", descricao);
+        values.put("preco", preco);
+        values.put("tipoTransacao", tipoTransacao);
+        values.put("metodoPagamento", metodoPagamento);
+        values.put("email", email);
+
+        // Inserindo os dados na tabela de transações e retornando o id gerado
+        long id = db.insert("transacoes", null, values);
+
+        // Fechando o banco de dados
+        db.close();
+
+        return id; // Retorna o id da transação inserida ou -1 se houver erro
+    }
+
     // Essa função retorna o banco de dados no modo leitura e escrita
     @Override
     public SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
     }
 
-    // Exemplo de uso do método gravaUsuario
+    // Exemplo de uso dos métodos gravaUsuario e inserirTransacao
     public static void main(String[] args) {
         // Suponhamos que o contexto esteja disponível (em uma Activity ou aplicação Android)
         Context context = null; // Substitua por um contexto válido, como 'this' em uma Activity.
@@ -88,5 +110,16 @@ public class BancoController extends SQLiteOpenHelper {
         } else {
             System.out.println("Ocorreu um erro ao gravar o usuário.");
         }
+
+        // Inserir uma transação no banco de dados
+        long idTransacao = bancoController.inserirTransacao("Venda de Carro", "50000", "Venda", "Cartão de Crédito", "joao@email.com");
+
+        // Verificar se a transação foi inserida com sucesso
+        if (idTransacao != -1) {
+            System.out.println("Transação inserida com sucesso! ID da Transação: " + idTransacao);
+        } else {
+            System.out.println("Ocorreu um erro ao inserir a transação.");
+        }
     }
 }
+
