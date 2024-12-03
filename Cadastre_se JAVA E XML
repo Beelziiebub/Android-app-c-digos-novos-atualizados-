@@ -51,7 +51,7 @@ public class Cadastre_se extends AppCompatActivity implements View.OnClickListen
         if (!verificaDados()) {
             // Gravar os dados no banco
             BancoController bd = new BancoController(getBaseContext());
-            String resultado = bd.gravaUsuario(txtNome, txtEmail, txtCpf, txtSenha);
+            String resultado = String.valueOf(bd.gravaUsuario(txtNome, txtEmail, txtCpf, txtSenha));
             // Exibe o resultado
             showToast(resultado);
         }
@@ -90,7 +90,7 @@ public class Cadastre_se extends AppCompatActivity implements View.OnClickListen
     private void showToast(String mensagem) {
         Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_LONG).show();
     }
-}
+
 
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -287,3 +287,4 @@ public class Cadastre_se extends AppCompatActivity implements View.OnClickListen
       android:contentDescription="Botão para salvar os dados de cadastro"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
