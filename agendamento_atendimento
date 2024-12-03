@@ -169,7 +169,8 @@ public class AgendamentoAtendimento extends AppCompatActivity implements View.On
         android:gravity="top|start"
         android:textSize="16sp"
         android:layout_marginBottom="20dp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:inputType="textMultiLine"/>
 
     <!-- Botão Agendar -->
     <Button
@@ -183,3 +184,4 @@ public class AgendamentoAtendimento extends AppCompatActivity implements View.On
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"/>
 </LinearLayout>
+
